@@ -1,0 +1,55 @@
+= render layout: 'layouts/application' do
+    .container.hero
+      .sam
+        a href=""
+          = image_tag "unkle.png"
+          span
+            | if you want to become a model, click here
+      .social
+        a href=""
+          i.fa.fa-facebook
+          |facebook
+        a href=""
+          i.fa.fa-twitter
+          |twitter
+        a href=""
+          i.fa.fa-instagram
+          |instagram
+      .row
+        .col-md-12.hero-text-box
+          .hero-text
+          .slider
+            - @slides.each do |slide|
+              div
+                = image_tag slide.image.url
+    .container.title-and-text
+      .row
+        .col-md-offset-2.col-md-3
+          h1 = Settings.application.title
+        .col-md-6
+          p = Settings.application.desciption
+
+    .container-fluid.categories
+      .row#gallery
+        .col-md-2.title-category#gallery-header
+          #gallery-header-center
+            h3 categories
+
+            #gallery-header-center-right
+              #filter-all.gallery-links All
+              - @categories.each do |category|
+                .gallery-links data-filter=category.id = category.name
+        .col-md-10.gallery-content#gallery-content
+          ul.content-gird#gallery-content-center
+            - @girls.each do |girl|
+              li.girl.all class=( girl.categories.empty? ? '' : girl.categories.map{ |cat| "category-#{cat.id}" }.join(" ") )
+                - if girl.main_photo
+                  = image_tag girl.main_photo.image.url
+                - unless girl.photos.empty?
+                  dl.ggallery
+                    dt data={ 'src' => girl.main_photo.image.url, 'sub-html' => "<h3>#{girl.name}</h3><p>#{girl.description}</p>"}
+                      = image_tag girl.main_photo.image.url
+                    - girl.photos.each do |photo|
+                      - if !photo.is_main?
+                        dt data-src=photo.image.url
+                          = image_tag photo.image.url

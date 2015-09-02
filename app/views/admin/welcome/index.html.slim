@@ -1,0 +1,79 @@
+= render layout: '/layouts/application' do
+  .container-fluid.admin ng-app="admin_app" ng-controller="AdminCtrl"
+    .col-md-12
+      .row.header
+        .col-md-2
+          h1
+            | {{title.value}}
+          span.icon-glass admin panel
+        .col-md-9.social
+          span edit social
+          ul
+            li ng-repeat="social in socials"
+              p
+                i.fa class="fa-{{social.name}}"
+                | {{social.name}}
+              .form-group
+                input type='text' ng-model="social.url"
+            li
+              button ng-click="socials.$save()"
+                |save
+        .col-md-1
+          button.sign-out data-form, data-form_submit, data-action='/sessions/logout', data-method='delete'
+            i.fa.fa-sign-out
+            |sign out
+      .row.controls
+        .col-md-3.edit-hero
+          h2
+            i.fa.fa-university
+            | Edit hero
+          .controls-button
+            button ng-click="save_hero()"
+              | save
+          p add slide
+          ul
+            li ng-repeat="slide in slides" ng-if="slide.file_id !== undefined && slide.file_id !== null"
+              img ng-src="{{slide.path}}" alt=""
+              a href=""
+                i.fa.fa-times ng-click="delete_slide(slide)"
+          .clear-fix
+          .form-group
+            .file-upload-wrapper data-text='Select your file!'
+              input.file-upload-field name='file-upload-field' type='file' ng-file-select="add_slides($files)" multiple=true
+          .upload-img-progress ng-repeat="uploading_slide in uploading_slides" ng-if="!uploading_slide.finished"
+            .name-and-disable
+              span
+                | {{uploading_slide.file.name}}
+              button
+                i.fa.fa-times ng-click="abort_slide_uploading(uploading_slide)"
+
+            .progress ng-if="uploading_slide.uploading"
+              .progress-bar role='progressbar' aria-valuenow="{{uploading_slide.progress}}" aria-valuemin='0' aria-valuemax='100' style='width: {{uploading_slide.progress}}%;'
+                span.sr-only
+          p edit text in hero
+          .text-box
+            span main title
+            h4 contenteditable='true' binder ng-model="title.value" {{title.value}}
+          .text-box
+            span main description
+            h5 contenteditable='true' binder ng-model="description.value" {{description.value}}
+
+        .col-md-7
+          ng-include(src="'girls'", ng-controller="GirlsCtrl")
+        .col-md-2.add-categories
+          ng-include(src="'categories'", ng-controller="CategoriesCtrl")
+
+  script#categories type="text/ng-template"
+    = render '/admin/categories/index'
+  script#category type="text/ng-template"
+    = render '/admin/categories/edit'
+  script#category_new type="text/ng-template"
+    = render '/admin/categories/new'
+  script#girls type="text/ng-template"
+      = render '/admin/girls/index'
+  script#girl type="text/ng-template"
+      = render '/admin/girls/edit'
+  script#girl_new type="text/ng-template"
+      = render '/admin/girls/new'
+  = javascript_include_tag 'admin'
+
