@@ -2,7 +2,7 @@
 #= require angular
 #= require angular-file-upload/angular-file-upload
 #= require angular-cookies
-#= require restangular
+#= require angular-resource
 #= require angular-route
 #= require_self
 #= require_tree ./admin-app/controllers
@@ -16,7 +16,7 @@
 admin_app = angular.module 'admin_app', [
     'ngRoute'
     'angularFileUpload'
-    'restangular'
+    'ngResource'
     'finder_controllers'
     'finder_services'
     'finder_directives'

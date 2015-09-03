@@ -1,7 +1,7 @@
-p.category(contenteditable="{{category.editing || false}}" ng-class="{'edit-now': category.editing}" binder ng-model="category.name") {{category.name}}
-button.edit(ng-click="edit(category)")
+p.category contenteditable="{{category.id == editing_id || false}}" ng-class="{'edit-now': category.id == editing_id}" binder=true ng-model="category.name" {{category.name}}
+button.edit ng-click="edit(category)"
   i.fa.fa-pencil-square-o
-    | {{category.editing ? 'update' : 'edit'}}
-button(ng-click="destroy(category)")
+    | {{category.id == editing_id ? 'update' : 'edit'}}
+button ng-click="destroy(category)"
   i.fa.fa-times
   | remove

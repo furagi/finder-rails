@@ -2,7 +2,7 @@
 
 
 CategoriesCtrl = ($scope, Category) ->
-    $scope.new_category = new Category()
+    $scope.new_category = {}
     $scope.current = null
     $scope.add = ->
         unless typeof $scope.new_category.name is 'string' and $scope.new_category.name isnt ''

@@ -53,7 +53,7 @@ gem 'underscore-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'font-awesome-rails'
 gem 'angularjs-rails'
-gem 'ng-rails-csrf'
+gem 'angular_rails_csrf'
 gem "paperclip", "~> 4.3"
 source 'https://rails-assets.org' do
   gem 'rails-assets-restangular'

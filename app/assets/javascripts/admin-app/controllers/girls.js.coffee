@@ -67,7 +67,7 @@ GirlsCtrl = ($scope, Girl, Category) ->
                    $scope.girls[index] = $scope.current
 
     $scope.clear = ->
-        $scope.edit(new Girl())
+        $scope.edit {}
 
     $scope.change_main_photo = (file) ->
         i = -1
@@ -78,8 +78,9 @@ GirlsCtrl = ($scope, Girl, Category) ->
         if i isnt -1
             $scope.girls[i].$change_main_photo {file_id: file.file_id}
 
-    $scope.girls = Girl.query()
-    $scope.clear()
+    Girl.getList().then (res) ->
+        $scope.girls = res
+        $scope.clear()
 
 finder_controllers = angular.module 'finder_controllers'
 finder_controllers.controller 'GirlsCtrl', [
