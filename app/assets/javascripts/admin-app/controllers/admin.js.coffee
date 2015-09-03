@@ -2,7 +2,7 @@
 
 
 AdminCtrl = ($scope, Category, Application, Slide) ->
-    $scope.categories = []#Category.query()
+    $scope.categories = Category.query()
     $scope.slides = Slide.query()
     new Application({id: 'socials'}).$get (res) ->
         $scope.socials = res.socials

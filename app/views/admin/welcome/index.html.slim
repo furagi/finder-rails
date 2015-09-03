@@ -53,27 +53,27 @@
           p edit text in hero
           .text-box
             span main title
-            h4 contenteditable='true' binder ng-model="title.value" {{title.value}}
+            h4 contenteditable='true' binder=true ng-model="title.value" {{title.value}}
           .text-box
             span main description
-            h5 contenteditable='true' binder ng-model="description.value" {{description.value}}
+            h5 contenteditable='true' binder=true ng-model="description.value" {{description.value}}
 
         .col-md-7
-          ng-include(src="'girls'", ng-controller="GirlsCtrl")
+          ng-include src="'girls'" ng-controller="GirlsCtrl"
         .col-md-2.add-categories
-          ng-include(src="'categories'", ng-controller="CategoriesCtrl")
+          ng-include src="'categories'" ng-controller="CategoriesCtrl"
 
-  script#categories type="text/ng-template"
-    = render '/admin/categories/index'
-  script#category type="text/ng-template"
-    = render '/admin/categories/edit'
-  script#category_new type="text/ng-template"
-    = render '/admin/categories/new'
-  script#girls type="text/ng-template"
-      = render '/admin/girls/index'
-  script#girl type="text/ng-template"
-      = render '/admin/girls/edit'
-  script#girl_new type="text/ng-template"
-      = render '/admin/girls/new'
+      script#categories type="text/ng-template"
+        = render '/admin/categories/index'
+      script#category type="text/ng-template"
+        = render '/admin/categories/edit'
+      script#category_new type="text/ng-template"
+        = render '/admin/categories/new'
+      script#girls type="text/ng-template"
+          = render '/admin/girls/index'
+      script#girl type="text/ng-template"
+          = render '/admin/girls/edit'
+      script#girl_new type="text/ng-template"
+          = render '/admin/girls/new'
   = javascript_include_tag 'admin'
 
