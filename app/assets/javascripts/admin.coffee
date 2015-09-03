@@ -16,7 +16,6 @@
 admin_app = angular.module 'admin_app', [
     'ngRoute'
     'angularFileUpload'
-    'ngResource'
     'finder_controllers'
     'finder_services'
     'finder_directives'
@@ -24,21 +23,19 @@ admin_app = angular.module 'admin_app', [
 
 admin_app.config([
     '$routeProvider'
-    'RestangularProvider'
-    ($routeProvider, RestangularProvider) ->
+    ($routeProvider) ->
         $routeProvider.when('/', {
                 controller: 'AdminCtrl'
             }).otherwise({
                 redirectTo: '/'
             })
-        RestangularProvider.setBaseUrl '/admin'
 ])
 
 
 finder_directives = angular.module 'finder_directives', ['ngCookies']
 
 finder_services = angular.module 'finder_services', [
-    'restangular'
+    'ngResource'
 ]
 .config [
     '$provide'

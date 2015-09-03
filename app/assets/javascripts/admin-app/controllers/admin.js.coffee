@@ -4,11 +4,11 @@
 AdminCtrl = ($scope, Category, Application, Slide) ->
     $scope.categories = Category.query()
     $scope.slides = Slide.query()
-    Application.get 'socials', (res) ->
+    new Application({id: 'socials'}).$get (res) ->
         $scope.socials = res.socials
-    Application.get('title').then (res) ->
+    new Application({id: 'title'}).$get (res) ->
         $scope.title = res
-    Application.get('description').then (res) ->
+    new Application({id: 'description'}).$get (res) ->
         $scope.description = res
 
     $scope.save_socials = ->

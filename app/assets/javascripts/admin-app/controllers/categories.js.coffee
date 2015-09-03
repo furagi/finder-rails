@@ -2,7 +2,7 @@
 
 
 CategoriesCtrl = ($scope, Category) ->
-    $scope.new_category = {}
+    $scope.new_category = new Category()
     $scope.current = null
     $scope.add = ->
         unless typeof $scope.new_category.name is 'string' and $scope.new_category.name isnt ''
@@ -12,7 +12,7 @@ CategoriesCtrl = ($scope, Category) ->
             $scope.categories.push category
     $scope.edit = (category) ->
         if category.editing
-            category.$save ->
+            category.$update ->
                 $scope.current = null
                 category.editing = off
             return
