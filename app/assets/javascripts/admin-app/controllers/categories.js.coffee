@@ -12,7 +12,7 @@ CategoriesCtrl = ($scope, Category) ->
             $scope.categories.push category
     $scope.edit = (category) ->
         if category.editing
-            category.$save ->
+            category.$update ->
                 $scope.current = null
                 category.editing = off
             return
