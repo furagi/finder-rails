@@ -3,10 +3,10 @@
 finder_services = angular.module 'finder_services'
 
 finder_services.factory 'Slide', [
-    '$resource'
+    'Restangular'
     '$upload'
-    ($resource, $upload) ->
-        Slide =  $resource '/admin/slides/:slide_id', {
+    (Restangular, $upload) ->
+        Slide =  Restangular '/slides/:slide_id', {
                 slide_id: '@file_id'
             }, {
             }

@@ -2,7 +2,7 @@
 #= require angular
 #= require angular-file-upload/angular-file-upload
 #= require angular-cookies
-#= require angular-resource
+#= require restangular
 #= require angular-route
 #= require_self
 #= require_tree ./admin-app/controllers
@@ -16,6 +16,7 @@
 admin_app = angular.module 'admin_app', [
     'ngRoute'
     'angularFileUpload'
+    'restangular'
     'finder_controllers'
     'finder_services'
     'finder_directives'
@@ -23,19 +24,21 @@ admin_app = angular.module 'admin_app', [
 
 admin_app.config([
     '$routeProvider'
-    ($routeProvider) ->
+    'RestangularProvider'
+    ($routeProvider, RestangularProvider) ->
         $routeProvider.when('/', {
                 controller: 'AdminCtrl'
             }).otherwise({
                 redirectTo: '/'
             })
+        RestangularProvider.setBaseUrl '/admin'
 ])
 
 
 finder_directives = angular.module 'finder_directives', ['ngCookies']
 
 finder_services = angular.module 'finder_services', [
-    'ngResource'
+    'restangular'
 ]
 .config [
     '$provide'

@@ -3,18 +3,19 @@
 finder_services = angular.module 'finder_services'
 
 finder_services.factory 'Girl', [
-    '$resource'
+    'Restangular'
     '$upload'
     'FileResource'
-    ($resource, $upload, FileResource) ->
-        Girl = $resource '/admin/girls/:girl_id', {
-                girl_id: '@girl_id'
-            }, {
-                change_main_photo: {
-                    method: 'POST'
-                    url: '/admin/girls/:girl_id/change_main_photo'
-                }
-            }
+    (Restangular, $upload, FileResource) ->
+        Girl = Restangular.all 'girls'
+        # , {
+        #         girl_id: '@girl_id'
+        #     }, {
+        #         change_main_photo: {
+        #             method: 'POST'
+        #             url: '/girls/:girl_id/change_main_photo'
+        #         }
+        #     }
         Girl::save = (callback) ->
             options = {
                 url: "/admin/girls"

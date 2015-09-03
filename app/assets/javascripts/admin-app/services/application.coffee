@@ -3,10 +3,7 @@
 finder_services = angular.module 'finder_services'
 
 finder_services.factory 'Application', [
-    '$resource'
-    ($resource) ->
-        return $resource '/admin/settings/:id', {
-                id: '@id'
-            }, {
-            }
+  'Restangular'
+  (Restangular) ->
+    return Restangular.all 'settings'
 ]

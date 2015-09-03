@@ -55,3 +55,6 @@ gem 'font-awesome-rails'
 gem 'angularjs-rails'
 gem 'ng-rails-csrf'
 gem "paperclip", "~> 4.3"
+source 'https://rails-assets.org' do
+  gem 'rails-assets-restangular'
+end
