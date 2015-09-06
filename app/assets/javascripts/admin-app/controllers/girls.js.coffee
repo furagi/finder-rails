@@ -6,12 +6,11 @@ GirlsCtrl = ($scope, Girl, Category) ->
         $scope.current._categories = {
         }
         _.each $scope.categories, (category) ->
-            unless $scope.current.categories?.length
-                $scope.current._categories[category.category_id] = off
+            unless $scope.current.category_ids?.length
+                $scope.current._categories[category.id] = off
                 return
-            result = _.find $scope.current.categories, (_category) ->
-                category.category_id is _category.category_id
-            $scope.current._categories[category.category_id] = result?
+            contains = $scope.current.category_ids.indexOf(category.id) isnt -1
+            $scope.current._categories[category.id] = contains
 
     $scope.edit = (girl) ->
         $scope.current = girl
@@ -27,25 +26,20 @@ GirlsCtrl = ($scope, Girl, Category) ->
         unless typeof $scope.current.description is 'string' and $scope.current.description isnt ''
             alert "Fill description first"
             return
-        $scope.current.categories = []
-        categories = $scope.categories.map (category) -> category.category_id
-        _.each $scope.current._categories, (has, category_id) ->
-            if categories.indexOf(+category_id) is -1
-                delete $scope.current._categories[category_id]
+        $scope.current.category_ids = []
+        categories = $scope.categories.map (category) -> category.id
+        _.each $scope.current._categories, (has, id) ->
+            if categories.indexOf(+id) is -1
+                delete $scope.current._categories[id]
             else if has
-                $scope.current.categories.push category_id
-        index = -1
-        if $scope.current.girl_id?
-            _.each $scope.girls, (girl, _index) ->
-                if girl.girl_id is $scope.current.girl_id
-                    index = _index
-        $scope.current.save (girl) ->
-            if index is -1
+                $scope.current.category_ids.push +id
+        if $scope.current.id?
+            $scope.current.$update()
+        else
+            $scope.current.$save (girl) ->
                 $scope.girls.push girl
-            else
-                $scope.girls.splice index, 1, girl
-            $scope.current = girl
-            update_categories()
+                $scope.current = girl
+                update_categories()
 
 
     $scope.destroy = (girl) ->
@@ -60,10 +54,10 @@ GirlsCtrl = ($scope, Girl, Category) ->
 
     $scope.delete_file = (file) ->
         $scope.current.delete_file file, ->
-            unless $scope.current.girl_id?
+            unless $scope.current.id?
                 return
             _.each $scope.girls, (girl, index) ->
-                if girl.girl_id is $scope.current.girl_id
+                if girl.id is $scope.current.id
                    $scope.girls[index] = $scope.current
 
     $scope.clear = ->
@@ -72,7 +66,7 @@ GirlsCtrl = ($scope, Girl, Category) ->
     $scope.change_main_photo = (file) ->
         i = -1
         _.find $scope.girls, (girl, _i) ->
-            if girl.girl_id is file.girl_id
+            if girl.id is file.id
                 i = _i
                 return on
         if i isnt -1

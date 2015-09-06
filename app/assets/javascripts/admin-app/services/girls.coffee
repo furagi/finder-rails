@@ -7,28 +7,29 @@ finder_services.factory 'Girl', [
     '$upload'
     'FileResource'
     ($resource, $upload, FileResource) ->
-        Girl = $resource '/admin/girls/:girl_id', {
-                girl_id: '@girl_id'
+        Girl = $resource '/admin/girls/:id', {
+                id: '@id'
             }, {
                 change_main_photo: {
                     method: 'POST'
-                    url: '/admin/girls/:girl_id/change_main_photo'
-                }
+                    url: '/admin/girls/:id/change_main_photo'
+                },
+                update: {method: 'PUT'}
             }
         Girl::save = (callback) ->
             options = {
                 url: "/admin/girls"
                 method: 'POST'
                 data: {
-                    categories: @categories
+                    categories: [2, 3]
                     name: @name
                     description: @description
                 }
             }
-            if @girl_id?
-                options.url += "/admin/#{@girl_id}"
+            if @id?
+                options.url += "/admin/girls/#{@id}"
             if @file
-                options.file = @file
+                options.image = @file
             @progress = 0
             @uploading = on
             @_uploader = $upload.upload options

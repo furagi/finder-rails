@@ -5,7 +5,7 @@
     |Select models
   .form-group.search-box
     label for='search'
-    input#search.form-control type='text', placeholder='search models'
+    input#search.form-control type='text' placeholder='search models'
     button.search
       i.fa.fa-search
   ol.breadcrumb
@@ -13,6 +13,7 @@
       a href='#' All models
     li
       a href='#' Top
-    li.active | {{current.name}}
+    li.active
+      | {{current.name}}
   ul
-    li ng-repeat="girl in girls" ng-include="'girl'", ng-click="edit(girl)"
+    li ng-repeat="girl in girls" ng-include="'girl'" ng-click="edit(girl)"
