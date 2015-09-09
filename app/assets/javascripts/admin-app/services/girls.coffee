@@ -16,30 +16,29 @@ finder_services.factory 'Girl', [
                 },
                 update: {method: 'PUT'}
             }
-        Girl::save = (callback) ->
-            options = {
-                url: "/admin/girls"
+        Girl::update = ->
+            @$update =>
+                if @file
+                    @upload_photo()
+
+        Girl::upload_photo = ->
+            options =
+                url: "/admin/girls/#{@id}/photos"
                 method: 'POST'
-                data: {
-                    categories: [2, 3]
-                    name: @name
-                    description: @description
-                }
-            }
-            if @id?
-                options.url += "/admin/girls/#{@id}"
-            if @file
-                options.image = @file
+                data:
+                    image: @file
             @progress = 0
             @uploading = on
             @_uploader = $upload.upload options
             .progress (event) =>
                 @progress = Math.round 100 * event.loaded / event.total
-            .success (girl, status, headers, config) =>
-                girl = new Girl girl
+            .success (photo, status, headers, config) =>
+                unless @photos?
+                    @photos = []
+                @photos.push photo
                 @abort()
                 @_uploader = null
-                callback girl
+                callback @
             .error =>
                 @_uploader = null
                 @abort()
@@ -51,9 +50,11 @@ finder_services.factory 'Girl', [
             @progress = 0
 
         Girl::main_photo = ->
-            main = _.find @files, (file) ->
-                file.type is 'photo' and file.is_main
-            return main?.path
+            unless 'number' is (typeof @main_photo_id) and @photos?.length > 0
+                return off
+            main = _.find @photos, (photo) =>
+                photo.id is @main_photo_id
+            return main?.url
 
         Girl::has_category = (category) ->
             unless @categories?.length > 0

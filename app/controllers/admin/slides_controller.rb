@@ -6,6 +6,6 @@ class Admin::SlidesController < InheritedResources::Base
 
   private
     def permitted_params
-      params.require(:slide).permit(:image)
+      params.permit(:file)
     end
 end

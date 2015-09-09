@@ -27,7 +27,7 @@ test:
   password: mysql
   pool: 5
   timeout: 5000
-  database: finder
+  database: finder_test
   encoding: utf8
 
 production:

@@ -1,4 +1,11 @@
-.col-md-5.add-models ng-include="'girl_new'"
+.col-md-5.add-models
+  h2
+    i.fa.fa-camera
+    |Add/Edit models
+  div ng-hide="girl_exists()"
+    ng-include src="'girls_new'"
+  div ng-show="girl_exists()"
+    ng-include src="'girls_edit'"
 .col-md-7.edit-models
   h2
     i.fa.fa-eraser
@@ -16,4 +23,4 @@
     li.active
       | {{current.name}}
   ul
-    li ng-repeat="girl in girls" ng-include="'girl'" ng-click="edit(girl)"
+    li ng-repeat="girl in girls" ng-include="'girls_show'" ng-click="edit(girl)"

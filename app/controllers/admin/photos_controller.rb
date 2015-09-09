@@ -1,5 +1,12 @@
-class Admin::FilesController < ApplicationController
-  def destroy
+class Admin::PhotosController < InheritedResources::Base
+  actions :create, :destroy
 
-  end
+  respond_to :json
+
+  belongs_to :girls, :finder => :find_by_id!, :param => :girl_id
+
+  # private
+  #   def permitted_params
+  #     params
+  #   end
 end

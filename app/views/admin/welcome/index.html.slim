@@ -19,7 +19,7 @@
               button ng-click="socials.$save()"
                 |save
         .col-md-1
-          button.sign-out data-form, data-form_submit, data-action='/sessions/logout', data-method='delete'
+          button.sign-out data-form=true data-form_submit=true data-action='/sessions/logout' data-method='delete'
             i.fa.fa-sign-out
             |sign out
       .row.controls
@@ -59,7 +59,7 @@
             h5 contenteditable='true' binder=true ng-model="description.value" {{description.value}}
 
         .col-md-7
-          ng-include src="'girls'" ng-controller="GirlsCtrl"
+          ng-include src="'girls_index'" ng-controller="GirlsCtrl"
         .col-md-2.add-categories
           ng-include src="'categories'" ng-controller="CategoriesCtrl"
 
@@ -69,11 +69,13 @@
         = render '/admin/categories/edit'
       script#category_new type="text/ng-template"
         = render '/admin/categories/new'
-      script#girls type="text/ng-template"
-          = render '/admin/girls/index'
-      script#girl type="text/ng-template"
-          = render '/admin/girls/edit'
-      script#girl_new type="text/ng-template"
-          = render '/admin/girls/new'
+      script#girls_index type="text/ng-template"
+        = render '/admin/girls/index'
+      script#girls_show type="text/ng-template"
+        = render '/admin/girls/show'
+      script#girls_new type="text/ng-template"
+        = render '/admin/girls/new'
+      script#girls_edit type="text/ng-template"
+        = render '/admin/girls/edit'
   = javascript_include_tag 'admin'
 

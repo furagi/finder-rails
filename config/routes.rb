@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :users
   get 'welcome/index'
 
 
@@ -13,11 +14,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, :defaults => {format: :json}
 
-    resources :girls, :defaults => {format: :json}
+    resources :girls, :defaults => {format: :json} do
+      resources :photos
+    end
 
     resources :slides, :defaults => {format: :json}
-
-    resources :files, :defaults => {format: :json}
 
     resources :settings, :defaults => {format: :json}
 

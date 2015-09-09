@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  path: MyString
-  size: 1
+  image_file_name: 5.jpg
+  image_content_type: image/jpeg
+  image_file_size: 123456
 
 two:
-  path: MyString
-  size: 1
+  image_file_name: 6.jpg
+  image_content_type: image/jpeg
+  image_file_size: 123456

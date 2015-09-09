@@ -42,6 +42,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'quiet_assets'
+
+  gem 'rspec-rails'
 end
 
 #additional gems

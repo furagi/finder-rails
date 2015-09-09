@@ -1,11 +1,6 @@
-h2
-  i.fa.fa-camera
-  |Add/Edit models
 .controls-button
   button ng-click="clear()" clear
-  button ng-click="save()" save
-.if-select-model ng-if="current.files.length > 0"
-  img ng-src="{{current.main_photo()}}" alt=""
+  button ng-click="create()" save
 .form-group
   label for='namemodels'
   input#namemodels.form-control type='text' placeholder='Enter name' ng-model="current.name"
@@ -18,22 +13,3 @@ p select categories
       input type='checkbox' ng-model="current._categories[category.id]"
       | {{category.name}}
 .clear-fix
-.form-group ng-if="current.name"
-  .file-upload-wrapper data-text='Select your file!'
-    input.file-upload-field ng-file-select="add_file($files)" type='file' name='file-upload-field'
-.upload-img-progress ng-if="current.uploading"
-  .name-and-disable
-    span
-      | {{current.photo.name}}
-    button
-      i.fa.fa-times ng-click="current.abort()"
-  .progress
-    .progress-bar role='progressbar' aria-valuenow="{{current.progress}}" aria-valuemin='0' aria-valuemax='100' style='width: {{current.progress}}%;'
-      span.sr-only
-p ng-if="current.files.length > 0" Have photo
-ul ng-if="current.files.length > 0")
-  li ng-repeat="file in current.files | orderBy: '-is_main'" ng-class="{main: file.is_main}")
-    img ng-src="{{file.path}}" alt=""
-    a href="" ng-click="delete_file(file)"
-      i.fa.fa-times
-    a href="" ng-if="!file.is_main" ng-click="change_main_photo(file)" main

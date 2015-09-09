@@ -6,7 +6,7 @@ class Admin::CategoriesController < InheritedResources::Base
 
   private
     def permitted_params
-      params.permit(:category => [:name])
+      {:category => params.permit(:name)}
     end
 
 end

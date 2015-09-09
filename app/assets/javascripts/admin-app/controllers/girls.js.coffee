@@ -12,6 +12,9 @@ GirlsCtrl = ($scope, Girl, Category) ->
             contains = $scope.current.category_ids.indexOf(category.id) isnt -1
             $scope.current._categories[category.id] = contains
 
+    $scope.girl_exists = ->
+        'number' is typeof $scope.current?.id
+
     $scope.edit = (girl) ->
         $scope.current = girl
         index = $scope.girls.indexOf girl
@@ -19,28 +22,39 @@ GirlsCtrl = ($scope, Girl, Category) ->
             $scope.girls[index].editing = on
         update_categories()
 
-    $scope.save = ->
-        unless typeof $scope.current.name is 'string' and $scope.current.name isnt ''
+    validate = (girl) ->
+        unless typeof girl.name is 'string' and girl.name isnt ''
             alert "Fill name first"
-            return
-        unless typeof $scope.current.description is 'string' and $scope.current.description isnt ''
+            return off
+        unless typeof girl.description is 'string' and girl.description isnt ''
             alert "Fill description first"
-            return
-        $scope.current.category_ids = []
-        categories = $scope.categories.map (category) -> category.id
-        _.each $scope.current._categories, (has, id) ->
-            if categories.indexOf(+id) is -1
-                delete $scope.current._categories[id]
-            else if has
-                $scope.current.category_ids.push +id
-        if $scope.current.id?
-            $scope.current.$update()
-        else
-            $scope.current.$save (girl) ->
-                $scope.girls.push girl
-                $scope.current = girl
-                update_categories()
+            return off
+        return on
 
+    collect_categories = (girl) ->
+        category_ids = []
+        categories = $scope.categories.map (category) -> category.id
+        _.each girl._categories, (has, id) ->
+            if categories.indexOf(+id) is -1
+                delete girl._categories[id]
+            else if has
+                category_ids.push +id
+        return category_ids
+
+    $scope.create = ->
+        unless validate($scope.current)
+            return
+        $scope.current.category_ids = collect_categories($scope.current)
+        $scope.current.$save (girl) ->
+            $scope.girls.push girl
+            $scope.current = girl
+            update_categories()
+
+    $scope.update = ->
+        unless validate($scope.current)
+            return
+        $scope.current.category_ids = collect_categories($scope.current)
+        $scope.current.update()
 
     $scope.destroy = (girl) ->
         index = $scope.girls.indexOf girl

@@ -16,7 +16,8 @@ class Girl < ActiveRecord::Base
   def main_photo_should_belongs_to_self
     if self.main_photo_id.nil?
       return
-    else if self.photos.nil? or self.photos.empty? or !self.photos.find(self.main_photo_id)
+    end
+    if self.photos.nil? or self.photos.empty? or !self.photos.find(self.main_photo_id)
       record.errors[:photo] << "Main photo should belongs to self"
     end
   end

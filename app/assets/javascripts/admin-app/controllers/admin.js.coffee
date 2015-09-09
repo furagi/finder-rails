@@ -12,11 +12,11 @@ AdminCtrl = ($scope, Category, Application, Slide) ->
         $scope.description = res
 
     $scope.save_socials = ->
-        $scope.socials.$save()
+        $scope.socials.$update()
 
     $scope.save_hero = ->
-        $scope.title.$save()
-        $scope.description.$save()
+        # $scope.title.$update()
+        # $scope.description.$update()
         save_slides()
 
     $scope.uploading_slides = []

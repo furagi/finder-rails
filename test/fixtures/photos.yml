@@ -1,7 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  girl_id: 
+  girl_id: 2
+  image_file_name: 3.jpg
+  image_content_type: image
+  image_file_size: 123456
+
+
 
 two:
-  girl_id: 
+  girl_id: 2
+  image_file_name: 2.jpg
+  image_content_type: image
+  image_file_size: 123456
+

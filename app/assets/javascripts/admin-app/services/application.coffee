@@ -8,5 +8,6 @@ finder_services.factory 'Application', [
         return $resource '/admin/settings/:id', {
                 id: '@id'
             }, {
+              update: {method: 'PUT'}
             }
 ]

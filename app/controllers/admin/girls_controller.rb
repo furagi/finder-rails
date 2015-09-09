@@ -6,6 +6,6 @@ class Admin::GirlsController < InheritedResources::Base
 
   private
     def permitted_params
-      {:girl => params.permit(:name, :description, :main_photo_id, :image, category_ids: []) }
+      {:girl => params.permit(:name, :description, :main_photo_id, category_ids: []) }
     end
 end

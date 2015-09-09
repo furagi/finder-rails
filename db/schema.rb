@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825145445) do
+ActiveRecord::Schema.define(version: 20150909060257) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 100, null: false
@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 20150825145445) do
     t.string  "email",    limit: 45
     t.string  "password", limit: 64,                 null: false
     t.boolean "is_admin", limit: 1,  default: false, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",           limit: 255
+    t.string   "password_digest", limit: 255
+    t.string   "role",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_foreign_key "girl_to_category", "category", primary_key: "category_id", name: "fk_girl_to_category_category_id"
