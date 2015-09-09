@@ -1,7 +1,7 @@
 'use strict'
 
 
-GirlsCtrl = ($scope, Girl, Category) ->
+GirlsCtrl = ($scope, Girl, Category, Photo) ->
     update_categories = ->
         $scope.current._categories = {
         }
@@ -63,28 +63,25 @@ GirlsCtrl = ($scope, Girl, Category) ->
                 $scope.clear()
             $scope.girls.splice index, 1
 
-    $scope.add_file = ($files) ->
+    $scope.add_photo = ($files) ->
         $scope.current.file = $files[0]
 
-    $scope.delete_file = (file) ->
-        $scope.current.delete_file file, ->
-            unless $scope.current.id?
-                return
-            _.each $scope.girls, (girl, index) ->
-                if girl.id is $scope.current.id
-                   $scope.girls[index] = $scope.current
+    $scope.delete_photo = (photo) ->
+        i = -1
+        _.find $scope.current.photos, (item, index) ->
+            if item.id is photo.id
+                i =  index
+                return on
+        photo = new Photo photo
+        photo.$remove ->
+            $scope.current.photos.splice i, 1
 
     $scope.clear = ->
         $scope.edit(new Girl())
 
-    $scope.change_main_photo = (file) ->
-        i = -1
-        _.find $scope.girls, (girl, _i) ->
-            if girl.id is file.id
-                i = _i
-                return on
-        if i isnt -1
-            $scope.girls[i].$change_main_photo {file_id: file.file_id}
+    $scope.change_main_photo = (photo) ->
+        $scope.current.main_photo_id = photo.id
+        $scope.current.$update()
 
     $scope.girls = Girl.query()
     $scope.clear()
@@ -94,5 +91,6 @@ finder_controllers.controller 'GirlsCtrl', [
     '$scope'
     'Girl'
     'Category'
+    'Photo'
     GirlsCtrl
 ]

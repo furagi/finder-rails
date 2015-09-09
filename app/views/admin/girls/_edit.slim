@@ -17,7 +17,7 @@ p select categories
 .clear-fix
 .form-group
   .file-upload-wrapper data-text='Select your file!'
-    input.file-upload-field ng-file-select="add_file($files)" type='file' name='file-upload-field'
+    input.file-upload-field ng-file-select="add_photo($files)" type='file' name='file-upload-field'
 .upload-img-progress ng-if="current.uploading"
   .name-and-disable
     span
@@ -29,8 +29,8 @@ p select categories
       span.sr-only
 p ng-if="current.photos.length > 0" Have photo
 ul ng-if="current.photos.length > 0"
-  li ng-repeat="photo in current.photos | orderBy: 'id == current.main_photo_id'" ng-class="{main: photo.is_main}"
+  li ng-repeat="photo in current.photos | orderBy: 'id == current.main_photo_id'" ng-class="{main: photo.id == current.main_photo_id}"
     img ng-src="{{photo.url}}" alt=""
     a href="" ng-click="delete_photo(photo)"
       i.fa.fa-times
-    a href="" ng-if="!photo.is_main" ng-click="change_main_photo(photo)" main
+    a href="" ng-if="photo.id != current.main_photo_id" ng-click="change_main_photo(photo)" main

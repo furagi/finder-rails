@@ -5,15 +5,10 @@ finder_services = angular.module 'finder_services'
 finder_services.factory 'Girl', [
     '$resource'
     '$upload'
-    'FileResource'
-    ($resource, $upload, FileResource) ->
+    ($resource, $upload) ->
         Girl = $resource '/admin/girls/:id', {
                 id: '@id'
             }, {
-                change_main_photo: {
-                    method: 'POST'
-                    url: '/admin/girls/:id/change_main_photo'
-                },
                 update: {method: 'PUT'}
             }
         Girl::update = ->
@@ -38,7 +33,6 @@ finder_services.factory 'Girl', [
                 @photos.push photo
                 @abort()
                 @_uploader = null
-                callback @
             .error =>
                 @_uploader = null
                 @abort()
@@ -64,7 +58,7 @@ finder_services.factory 'Girl', [
             return result?
 
         Girl::delete_file = (file, callback) ->
-            file = new FileResource file
+            file = new Photo file
             file.$delete =>
                 index = null
                 @files.forEach (_file, _index) ->
