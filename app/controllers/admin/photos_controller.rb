@@ -5,8 +5,8 @@ class Admin::PhotosController < InheritedResources::Base
 
   belongs_to :girls, :finder => :find_by_id!, :param => :girl_id
 
-  # private
-  #   def permitted_params
-  #     params
-  #   end
+  private
+    def permitted_params
+      {photo: {image: params.permit(:file)[:file]}}
+    end
 end

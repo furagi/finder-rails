@@ -25,6 +25,7 @@ class Girl < ActiveRecord::Base
   def as_json(options = nil)
     girl = super({ only: [:id, :name, :description, :rating, :main_photo_id] }.merge(options || {}))
     girl[:category_ids] = categories.map{ |category| category.id }
+    girl[:photos] = self.photos
     girl
   end
 

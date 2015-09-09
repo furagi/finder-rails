@@ -9,4 +9,11 @@ class Photo < ActiveRecord::Base
   def is_main?
     Girl.find(self.girl_id).main_photo_id == self.id
   end
+
+  def as_json(options = nil)
+    photo = super({ only: [:id, :girl_id, :image_content_type, :image_file_name, :image_file_size] }.merge(options || {}))
+    photo[:url] = self.image.url
+    photo
+  end
+
 end

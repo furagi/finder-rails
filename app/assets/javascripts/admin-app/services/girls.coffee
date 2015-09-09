@@ -26,7 +26,7 @@ finder_services.factory 'Girl', [
                 url: "/admin/girls/#{@id}/photos"
                 method: 'POST'
                 data:
-                    image: @file
+                    file: @file
             @progress = 0
             @uploading = on
             @_uploader = $upload.upload options

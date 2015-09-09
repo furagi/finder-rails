@@ -1,7 +1,7 @@
 .controls-button
   button ng-click="clear()" clear
   button ng-click="update()" save
-.if-select-model ng-if="current.files.length > 0"
+.if-select-model ng-if="current.photos.length > 0 && current.main_photo()"
   img ng-src="{{current.main_photo()}}" alt=""
 .form-group
   label for='namemodels'
@@ -27,10 +27,10 @@ p select categories
   .progress
     .progress-bar role='progressbar' aria-valuenow="{{current.progress}}" aria-valuemin='0' aria-valuemax='100' style='width: {{current.progress}}%;'
       span.sr-only
-p ng-if="current.files.length > 0" Have photo
-ul ng-if="current.files.length > 0")
-  li ng-repeat="file in current.files | orderBy: '-is_main'" ng-class="{main: file.is_main}")
-    img ng-src="{{file.path}}" alt=""
-    a href="" ng-click="delete_file(file)"
+p ng-if="current.photos.length > 0" Have photo
+ul ng-if="current.photos.length > 0"
+  li ng-repeat="photo in current.photos | orderBy: 'id == current.main_photo_id'" ng-class="{main: photo.is_main}"
+    img ng-src="{{photo.url}}" alt=""
+    a href="" ng-click="delete_photo(photo)"
       i.fa.fa-times
-    a href="" ng-if="!file.is_main" ng-click="change_main_photo(file)" main
+    a href="" ng-if="!photo.is_main" ng-click="change_main_photo(photo)" main
