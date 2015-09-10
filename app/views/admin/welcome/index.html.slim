@@ -16,7 +16,7 @@
               .form-group
                 input type='text' ng-model="social.url"
             li
-              button ng-click="socials.$save()"
+              button ng-click="save_socials()"
                 |save
         .col-md-1
           button.sign-out data-form=true data-form_submit=true data-action='/sessions/logout' data-method='delete'
@@ -53,10 +53,11 @@
           p edit text in hero
           .text-box
             span main title
-            h4 contenteditable='true' binder=true ng-model="title.value" {{title.value}}
+            h4 contenteditable='true' binder=true ng-model="title"
+             | {{title}}
           .text-box
             span main description
-            h5 contenteditable='true' binder=true ng-model="description.value" {{description.value}}
+            h5 contenteditable='true' binder=true ng-model="description" {{description}}
 
         .col-md-7
           ng-include src="'girls_index'" ng-controller="GirlsCtrl"

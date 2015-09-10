@@ -7,16 +7,16 @@ AdminCtrl = ($scope, Category, Application, Slide) ->
     new Application({id: 'socials'}).$get (res) ->
         $scope.socials = res.socials
     new Application({id: 'title'}).$get (res) ->
-        $scope.title = res
+        $scope.title = res.title
     new Application({id: 'description'}).$get (res) ->
-        $scope.description = res
+        $scope.description = res.description
 
     $scope.save_socials = ->
         $scope.socials.$update()
 
     $scope.save_hero = ->
-        # $scope.title.$update()
-        # $scope.description.$update()
+        $scope.title.$update()
+        $scope.description.$update()
         save_slides()
 
     $scope.uploading_slides = []
