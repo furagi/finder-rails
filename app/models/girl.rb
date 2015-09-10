@@ -1,7 +1,7 @@
 class Girl < ActiveRecord::Base
   has_and_belongs_to_many :categories
   accepts_nested_attributes_for :categories #, :reject_if => :all_blank
-  has_many :photos
+  has_many :photos, dependent: :destroy
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { maximum: 1000 }
 
