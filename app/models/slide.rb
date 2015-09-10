@@ -4,4 +4,5 @@ class Slide < ActiveRecord::Base
   validates_attachment :image, presence: true,
     content_type: { content_type: "image/jpeg" },
     size: { in: 50..5120.kilobytes }
+  validates :image_fingerprint, :uniqueness => { :message => "Image has already been uploaded." }
 end

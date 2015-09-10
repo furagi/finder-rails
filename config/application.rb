@@ -27,8 +27,9 @@ module FinderRails
     Settings.reload!
 
     config.paperclip_defaults = {
-      :path => ":rails_root/public/system/:rails_env/images/:class/:filename",
-      :url => "/system/:rails_env/images/:class/:filename"
+      path: ":rails_root/public/system/:rails_env/images/:class/:basename:hash.:extension",
+      url: "/system/:rails_env/images/:class/:filename",
+      hash_secret: "images_secret"
     }
   end
 end
