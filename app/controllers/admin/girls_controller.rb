@@ -1,8 +1,13 @@
-class Admin::GirlsController < InheritedResources::Base
+class Admin::GirlsController < ApplicationController
+
+  respond_to :json
+
+  inherit_resources
+
+  before_action :require_user
 
   actions :index, :create, :update, :destroy
 
-  respond_to :json
 
   private
     def permitted_params

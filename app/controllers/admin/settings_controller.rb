@@ -1,19 +1,12 @@
-class Admin::SettingsController < InheritedResources::Base
+class Admin::SettingsController < ApplicationController
 
   respond_to :json
+
+  inherit_resources
+
+  before_action :require_user
+
   actions :index, :show, :update
-
-  # def index
-  #   respond_with FinderSetting.all
-  # end
-
-  # def show
-  #   respond_with FinderSetting.find params[:id]
-  # end
-
-  # def update
-  #   respond_with FinderSetting.update(params[:id], permitted_params)
-  # end
 
   protected
     def permitted_params

@@ -4,25 +4,28 @@ html(lang="en")
   head
     title = @title
 
-    meta(charset='utf-8')
-    meta(name='description', content='add descriptio')
-    meta(property='og:title', content='')
-    meta(property='og:site_name', content='')
-    meta(property='og:url', content='')
-    meta(property='og:description', content='')
-    meta(property='og:image', content='')
-    meta(property='og:type', content='website')
-    meta(name='twitter:card', content='summary_large_image')
-    meta(name='twitter:site', content='')
-    meta(name='twitter:title', content='')
-    meta(name='twitter:description', content='')
-    meta(name='twitter:image:src', content='')
-    meta(name='robots', content='index, follow')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='canonical', href='')
+    meta charset='utf-8'
+    meta name='description' content='add descriptio'
+    meta property='og:title' content=''
+    meta property='og:site_name' content=''
+    meta property='og:url' content=''
+    meta property='og:description' content=''
+    meta property='og:image' content=''
+    meta property='og:type' content='website'
+    meta name='twitter:card' content='summary_large_image'
+    meta name='twitter:site' content=''
+    meta name='twitter:title' content=''
+    meta name='twitter:description' content=''
+    meta name='twitter:image:src' content=''
+    meta name='robots' content='index, follow'
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    link rel='canonical' href=''
+    = csrf_meta_tags
     / = javascript_include_tag 'mylibs/modernizr.custom.js'
     = stylesheet_link_tag "application"
   body
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: name
     == yield
     = javascript_include_tag 'application'
 

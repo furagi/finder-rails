@@ -1,8 +1,13 @@
-class Admin::SlidesController < InheritedResources::Base
+class Admin::SlidesController < ApplicationController
+
+  respond_to :json
+
+  inherit_resources
+
+  before_action :require_user
 
   actions :index, :create, :destroy
 
-  respond_to :json
 
   private
     def permitted_params

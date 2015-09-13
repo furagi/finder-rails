@@ -1,0 +1,21 @@
+= render layout: '/layouts/application' do
+  .login
+    .container.hero
+      .row
+        .col-md-12.hero-text-box
+          .hero-text
+      .row
+        .col-md-12.login-box
+          = form_for(:session, url: admin_login_path) do |f|
+            h2 login
+            .form-group
+              = f.email_field :email, autofocus: true, placeholder: 'Enter email', class: ['form-control']
+            .form-group
+              = f.password_field :password, autocomplete: "off", placeholder: 'Password', class: ['form-control']
+            / - if devise_mapping.rememberable?
+            /   .checkbox
+            /     label
+            /       = f.check_box :remember_me
+            /         | Check me out
+
+            = f.button "Log in", class: ['btn', 'btn-default']

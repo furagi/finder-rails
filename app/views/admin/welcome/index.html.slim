@@ -19,9 +19,9 @@
               button ng-click="save_socials()"
                 |save
         .col-md-1
-          button.sign-out data-form=true data-form_submit=true data-action='/sessions/logout' data-method='delete'
+          button.sign-out
             i.fa.fa-sign-out
-            |sign out
+            = link_to 'Sign out', admin_logout_path, :method => :delete
       .row.controls
         .col-md-3.edit-hero
           h2

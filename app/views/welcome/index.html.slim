@@ -25,9 +25,9 @@
     .container.title-and-text
       .row
         .col-md-offset-2.col-md-3
-          h1 = Settings.application.title
+          h1 = @title
         .col-md-6
-          p = Settings.application.desciption
+          p = @desciption
 
     .container-fluid.categories
       .row#gallery
@@ -43,9 +43,9 @@
           ul.content-gird#gallery-content-center
             - @girls.each do |girl|
               li.girl.all class=( girl.categories.empty? ? '' : girl.categories.map{ |cat| "category-#{cat.id}" }.join(" ") )
-                - if girl.main_photo
+                - if girl.have_main_photo?
                   = image_tag girl.main_photo.image.url
-                - unless girl.photos.empty?
+                - if girl.have_main_photo?
                   dl.ggallery
                     dt data={ 'src' => girl.main_photo.image.url, 'sub-html' => "<h3>#{girl.name}</h3><p>#{girl.description}</p>"}
                       = image_tag girl.main_photo.image.url

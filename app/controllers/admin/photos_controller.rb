@@ -1,7 +1,13 @@
-class Admin::PhotosController < InheritedResources::Base
-  actions :create, :destroy
+class Admin::PhotosController < ApplicationController
 
   respond_to :json
+
+  inherit_resources
+
+  before_action :require_user
+
+  actions :create, :destroy
+
 
   belongs_to :girls, :finder => :find_by_id!, :param => :girl_id
 

@@ -5,12 +5,12 @@ class Girl < ActiveRecord::Base
   validates :name, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { maximum: 1000 }
 
+  def have_main_photo?
+    !self.main_photo_id.nil?
+  end
+
   def main_photo
-    if self.main_photo_id.nil?
-      false
-    else
-      Photo.find(self.main_photo_id)
-    end
+    Photo.find(self.main_photo_id)
   end
 
   def main_photo_should_belongs_to_self
