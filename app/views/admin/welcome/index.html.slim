@@ -32,8 +32,8 @@
               | save
           p add slide
           ul
-            li ng-repeat="slide in slides" ng-if="slide.file_id !== undefined && slide.file_id !== null"
-              img ng-src="{{slide.path}}" alt=""
+            li ng-repeat="slide in slides" ng-if="slide.id !== undefined && slide.id !== null"
+              img ng-src="{{slide.url}}" alt=""
               a href=""
                 i.fa.fa-times ng-click="delete_slide(slide)"
           .clear-fix
