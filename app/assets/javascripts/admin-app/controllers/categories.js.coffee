@@ -10,6 +10,7 @@ CategoriesCtrl = ($scope, Category) ->
             return
         $scope.new_category.$save (category) ->
             $scope.categories.push category
+            $scope.new_category = new Category()
     $scope.edit = (category) ->
         if category.editing
             category.$update ->
