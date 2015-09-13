@@ -6,6 +6,7 @@ class Photo < ActiveRecord::Base
     content_type: { content_type: "image/jpeg" },
     size: { in: 50..5120.kilobytes }
   validates :image_fingerprint, :uniqueness => { :message => "Image has already been uploaded." }
+  before_destroy :unset_main_photo
 
   def is_main?
     Girl.find(self.girl_id).main_photo_id == self.id
@@ -16,5 +17,14 @@ class Photo < ActiveRecord::Base
     photo[:url] = self.image.url
     photo
   end
+
+  private
+    def unset_main_photo
+      girl = Girl.find self.girl_id
+      if girl.main_photo_id == self.id
+        girl.main_photo_id = nil
+        girl.save
+      end
+    end
 
 end
