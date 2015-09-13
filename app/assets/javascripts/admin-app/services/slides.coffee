@@ -6,8 +6,8 @@ finder_services.factory 'Slide', [
     '$resource'
     '$upload'
     ($resource, $upload) ->
-        Slide =  $resource '/admin/slides/:slide_id', {
-                slide_id: '@file_id'
+        Slide =  $resource '/admin/slides/:id', {
+                id: '@id'
             }, {
             }
         Slide::create = (callback) ->
