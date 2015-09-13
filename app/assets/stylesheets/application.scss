@@ -129,28 +129,33 @@ $desktop: 1366px;
       }
     }
   }
-  .hero-text-box {
-    position: relative;
-    max-height: 500px;
-    overflow: hidden;
-    .hero-text {
-      position: absolute;
-      width: 60%;
-      height: 65%;
-      margin: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: image-url('hero.png');
-      background-size: cover;
-      z-index: 10;
-    }
-    .slider {
-      img {
-        width: 100%;
+  .row {
+    .hero-text-box {
+      position: relative;
+      max-height: 500px;
+      overflow: hidden;
+      background: #000;
+      height: 300px;
+      .hero-text {
+        position: absolute;
+        width: 36%;
+        height: 65%;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: image-url('hero.png');
+        background-size: cover;
+        z-index: 10;
+      }
+      .slider {
+        img {
+          width: 100%;
+        }
       }
     }
+
   }
 
 }
