@@ -10,6 +10,10 @@ class Admin::SettingsController < ApplicationController
 
   protected
     def permitted_params
-      {setting: params.permit(:value)}
+      if params[:id] == 'socials'
+        {setting: params.permit(value: [:name, :url])}
+      else
+        {setting: params.permit(:value)}
+      end
     end
 end
