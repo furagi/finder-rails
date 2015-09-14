@@ -24,6 +24,7 @@ module FinderRails
     config.active_record.raise_in_transactional_callbacks = true
 
     Settings.add_source!("#{Rails.root}/config/settings/finder.local.yml")
+    Settings.add_source!("#{Rails.root}/config/settings/database.local.yml")
     Settings.reload!
 
     config.paperclip_defaults = {
