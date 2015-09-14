@@ -491,7 +491,12 @@ $desktop: 1366px;
         }
         h5 {
           font-family: $lite;
-
+        }
+        textarea {
+          width: 100%;
+          font-family: "lite";
+          overflow: hidden;
+          resize: none;
         }
       }
     }

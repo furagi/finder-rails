@@ -12,15 +12,15 @@
     |Select models
   .form-group.search-box
     label for='search'
-    input#search.form-control type='text' placeholder='search models'
-    button.search
+    input#search.form-control type='text' placeholder='search models' ng-model='filters.pre_search_query'
+    button.search ng-click='search()'
       i.fa.fa-search
   ol.breadcrumb
     li
-      a href='#' All models
+      a href='#' ng-click='display_all()' All models
     li
       a href='#' Top
     li.active
       | {{current.name}}
   ul
-    li ng-repeat="girl in girls" ng-include="'girls_show'" ng-click="edit(girl)"
+    li ng-repeat="girl in girls | filter:filters.search_query" ng-include="'girls_show'" ng-click="edit(girl)"

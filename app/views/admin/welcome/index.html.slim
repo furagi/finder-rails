@@ -53,11 +53,12 @@
           p edit text in hero
           .text-box
             span main title
-            h4 contenteditable='true' binder=true ng-model="title"
-             | {{title}}
+            h4 ng-hide='title_editing' ng-click="start_title_editing()" {{title}}
+            input ng-show='title_editing' type='text' ng-model='title' ng-blur="stop_title_editing()"
           .text-box
             span main description
-            h5 contenteditable='true' binder=true ng-model="description" {{description}}
+            h5 ng-hide='description_editing' ng-click="start_description_editing()" {{description}}
+            textarea ng-show='description_editing' ng-model='description' ng-blur="stop_description_editing()" elastic=true
 
         .col-md-7
           ng-include src="'girls_index'" ng-controller="GirlsCtrl"

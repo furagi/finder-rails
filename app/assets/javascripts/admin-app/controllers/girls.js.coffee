@@ -83,7 +83,19 @@ GirlsCtrl = ($scope, Girl, Category, Photo) ->
         $scope.current.main_photo_id = photo.id
         $scope.current.$update()
 
+    $scope.search = ->
+        unless ($scope.filters.pre_search_query? and $scope.filters.pre_search_query isnt '')
+            return
+        $scope.filters.search_query = '' + $scope.filters.pre_search_query
+
+    $scope.display_all = ->
+        $scope.filters = {}
+
+
     $scope.girls = Girl.query()
+    $scope.filters = {
+        pre_search_query: ''
+    }
     $scope.clear()
 
 finder_controllers = angular.module 'finder_controllers'

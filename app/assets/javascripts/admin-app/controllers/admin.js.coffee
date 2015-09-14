@@ -59,9 +59,17 @@ AdminCtrl = ($scope, Category, Application, Slide) ->
                 return on
         $scope.uploading_slides.splice index, 1
 
+    $scope.start_title_editing = ->
+        $scope.title_editing = on
 
+    $scope.stop_title_editing = ->
+        $scope.title_editing = off
 
+    $scope.start_description_editing = ->
+        $scope.description_editing = on
 
+    $scope.stop_description_editing = ->
+        $scope.description_editing = off
 
 
 finder_controllers = angular.module 'finder_controllers'
