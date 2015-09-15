@@ -6,21 +6,21 @@ default: &default
 
 development:
   <<: *default
-  username: <%= Settings.database.development[:user] %>
+  username: <%= Settings.database.development[:username] %>
   password: <%= Settings.database.development[:password] %>
   host: <%= Settings.database.development[:host] %>
   database: <%= Settings.database.development[:database] %>
 
 test:
   <<: *default
-  username: <%= Settings.database.test[:user] %>
+  username: <%= Settings.database.test[:username] %>
   password: <%= Settings.database.test[:password] %>
   host: <%= Settings.database.test[:host] %>
   database: <%= Settings.database.test[:database] %>
 
 production:
   <<: *default
-  username: <%= Settings.database.production[:user] %>
+  username: <%= Settings.database.production[:username] %>
   password: <%= Settings.database.production[:password] %>
   host: <%= Settings.database.production[:host] %>
   database: <%= Settings.database.production[:database] %>
